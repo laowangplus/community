@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller {
     public function index(){
+        //猜你喜欢推荐文章
+        $like_articles = Article::getArticlesByLike();
         $articles = Article::getTopArticle();
         return view('index.index', [
-            'articles' => $articles
+            'articles' => $articles,
+            'like_articles' => $like_articles,
         ]);
     }
 }

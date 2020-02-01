@@ -11,6 +11,7 @@ namespace App\Http\Model\Index;
 
 use App\Exceptions\ErrorException;
 use App\Exceptions\MessageException;
+use App\Http\Service\YourLike;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,7 @@ class Article extends Model {
 
     public static function createArticle($data) {
         try {
-            $result = DB::table('article')->insert([
+            $article_id = DB::table('article')->insertGetId([
                 'category_id' => $data['class'],
                 'user_id'     => \Session::get('id'),
                 'title'       => $data['title'],
@@ -57,11 +58,30 @@ class Article extends Model {
                 'experience'  => $data['experience'],
                 'created_at'  => date('Y-m-d', $_SERVER['REQUEST_TIME']),
             ]);
-            if ($result) {
-                return True;
-            } else {
-                return false;
+
+            $tags = explode(',', $data['tag']);
+//            dd($tags);
+            foreach ($tags as $tag){
+                $exists = DB::table('tag')
+                    ->where('tag_name', '=', strtolower($tag))
+                    ->first();
+                if ($exists){
+                    DB::table('tag_article')->insert([
+                        'article_id' => $article_id,
+                        'tag_id' => $exists->id,
+                    ]);
+                }else{
+                    $tag_id = DB::table('tag')
+                        ->insertGetId([
+                            'tag_name' => strtolower($tag)
+                        ]);
+                    DB::table('tag_article')->insert([
+                        'article_id' => $article_id,
+                        'tag_id' => $tag_id,
+                    ]);
+                }
             }
+
         } catch (PDOException $e) {
             throw new ErrorException([
                 'msg' => $e->getMessage(),
@@ -110,7 +130,7 @@ class Article extends Model {
 
     public static function updateArticle($data) {
         try {
-            $result = DB::table('article')->where('id', '=', $data['id'])
+            DB::table('article')->where('id', '=', $data['id'])
                 ->update([
                     'category_id' => $data['class'],
                     'user_id'     => \Session::get('id'),
@@ -120,10 +140,53 @@ class Article extends Model {
                     'experience'  => $data['experience'],
                     'created_at'  => date('Y-m-d', $_SERVER['REQUEST_TIME']),
                 ]);
-            if ($result) {
-                return True;
-            } else {
-                return false;
+
+            $tags = explode(',', $data['tag']);
+//            dd($tags);
+            $old_tags = DB::table('tag_article')
+                ->where('article_id', '=', $data['id'])
+                ->get();
+//            dd($old_tags, $data['id']);
+            //exists_tags数组用于存放不更新的tag
+            $exists_tags = [];
+            foreach ($tags as $tag){
+                $exists = DB::table('tag')
+                    ->where('tag_name', '=', strtolower($tag))
+                    ->first();
+                if ($exists){
+                    $flag = 0;
+                    //判断新录入的tag原先是否已存在
+                    foreach ($old_tags as $old_tag){
+                        if ($old_tag->tag_id == $exists->id){
+                            $flag = 1;
+                        }
+                    }
+                    if ($flag != 0){
+                        $exists_tags[] = $exists->id;
+                        continue;
+                    }
+                    DB::table('tag_article')->insert([
+                        'article_id' => $data['id'],
+                        'tag_id' => $exists->id,
+                    ]);
+                }else{
+                    $tag_id = DB::table('tag')
+                        ->insertGetId([
+                            'tag_name' => strtolower($tag)
+                        ]);
+                    DB::table('tag_article')->insert([
+                        'article_id' => $data['id'],
+                        'tag_id' => $tag_id,
+                    ]);
+                }
+            }
+            //删除tag_article表中旧的tag标签
+            foreach ($old_tags as &$old_tag){
+                if (!in_array($old_tag->tag_id, $exists_tags)){
+                    DB::table('tag_article')
+                        ->where('id', '=', $old_tag->id)
+                        ->delete();
+                }
             }
         } catch (PDOException $e) {
             throw new ErrorException([
@@ -299,6 +362,37 @@ class Article extends Model {
         if ($result){
             return $result;
         }
+    }
+
+    public static function getArticlesByLike(){
+        $user_id = \Session::get('id');
+        if (!$user_id){
+            return [];
+        }
+        $tags = YourLike::getLike();
+        $articles = DB::table('tag_article')
+            ->whereIn('tag_id', $tags)
+            ->select('article_id')
+            ->get();
+        $article_ids = [];
+        foreach ($articles as $article){
+            $article_ids[] = $article->article_id;
+        }
+
+        $articles = DB::table('article')
+            ->join('category', 'category.id', '=', 'category_id')
+            ->join('user', 'user.id', '=', 'user_id')
+//            ->whereExists(function ($query)use ($tags){
+//                $query->from('tag_article')
+//                    ->whereIn('tag_id', $tags)
+//                    ->select('article_id as id');
+//            })
+            ->whereIn('article.id', $article_ids)
+            ->select('title', 'username', 'classname', 'comment_count',
+                'article.created_at as create_time', 'article.id as article_id',
+                'user.id as user_id', 'experience')
+            ->get();
+        return $articles;
     }
 
 }

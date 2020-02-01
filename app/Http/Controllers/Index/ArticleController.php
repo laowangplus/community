@@ -14,6 +14,7 @@ use App\Http\Model\Index\Article;
 use App\Http\Model\Index\Category;
 use App\Http\Model\Index\Comment;
 use App\Http\Service\TagDrive;
+use App\Http\Service\YourLike;
 use App\Validate\ArticleCheck;
 use App\Validate\CommentCheck;
 use Illuminate\Http\Request;
@@ -31,6 +32,9 @@ class ArticleController extends Controller {
     public function detail($article_id){
         $article = Article::getArticleDetail($article_id);
         $article->tag = TagDrive::TagToArray($article->tag);
+        //增加用户登录态的统计爱好
+        YourLike::addLike($article_id);
+        YourLike::getLike();
         $comments = Comment::getAllComment($article_id);
         $collection = Article::getArticleCollection($article_id);
         return view('index.article.detail', [
@@ -94,6 +98,7 @@ class ArticleController extends Controller {
         ]);
     }
 
+    //设置为精华文章
     public function essence($article_id){
         $status = Article::essence($article_id);
         return \Response::json([
@@ -101,4 +106,6 @@ class ArticleController extends Controller {
             'status' => $status,
         ]);
     }
+
+
 }

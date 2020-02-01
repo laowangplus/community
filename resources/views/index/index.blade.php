@@ -51,13 +51,16 @@
                 <div class="fly-panel" style="margin-bottom: 0;">
 
                     <div class="fly-panel-title fly-filter">
-                        <a href="" class="layui-this">综合</a>
-                        <span class="fly-mid"></span>
-                        <a href="">未结</a>
-                        <span class="fly-mid"></span>
-                        <a href="">已结</a>
-                        <span class="fly-mid"></span>
-                        <a href="">精华</a>
+                        <a>猜你喜欢</a>
+                        <a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin"
+                           style="color: #FF5722;">去签到</a>
+                        {{--<a href="" class="layui-this">综合</a>--}}
+                        {{--<span class="fly-mid"></span>--}}
+                        {{--<a href="">未结</a>--}}
+                        {{--<span class="fly-mid"></span>--}}
+                        {{--<a href="">已结</a>--}}
+                        {{--<span class="fly-mid"></span>--}}
+                        {{--<a href="">精华</a>--}}
                         <span class="fly-filter-right layui-hide-xs">
             <a href="" class="layui-this">按最新</a>
             <span class="fly-mid"></span>
@@ -66,42 +69,44 @@
                     </div>
 
                     <ul class="fly-list">
+                        @foreach($like_articles as $like_article)
                         <li>
-                            <a href="user/home.html" class="fly-avatar">
+                            <a href="{{url('user/home/'.$article->user_id)}}" class="fly-avatar">
                                 <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
                                      alt="贤心">
                             </a>
                             <h2>
-                                <a class="layui-badge">分享</a>
-                                <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
+                                <a class="layui-badge">{{$like_article->classname}}</a>
+                                <a href="{{url('article/detail/'.$article->article_id)}}">{{$like_article->title}}</a>
                             </h2>
                             <div class="fly-list-info">
-                                <a href="user/home.html" link>
-                                    <cite>贤心</cite>
+                                <a href="{{url('user/home/'.$article->user_id)}}" link>
+                                    <cite>{{$like_article->username}}</cite>
                                     <!--
                                     <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                                     <i class="layui-badge fly-badge-vip">VIP3</i>
                                     -->
                                 </a>
-                                <span>刚刚</span>
+                                <span>{{$like_article->create_time}}</span>
 
                                 <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i
-                                            class="iconfont icon-kiss"></i> 60</span>
+                                            class="iconfont icon-kiss"></i> {{$like_article->experience}}</span>
                                 <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
                                 <span class="fly-list-nums">
-                <i class="iconfont icon-pinglun1" title="回答"></i> 66
+                <i class="iconfont icon-pinglun1" title="回答"></i> {{$like_article->comment_count}}
               </span>
                             </div>
                             <div class="fly-list-badge">
                                 <!--<span class="layui-badge layui-bg-red">精帖</span>-->
                             </div>
                         </li>
+                            @endforeach
                     </ul>
-                    <div style="text-align: center">
-                        <div class="laypage-main">
-                            <a href="jie/index.html" class="laypage-next">更多求解</a>
-                        </div>
-                    </div>
+                    {{--<div style="text-align: center">--}}
+                        {{--<div class="laypage-main">--}}
+                            {{--<a href="jie/index.html" class="laypage-next">更多求解</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                 </div>
             </div>
