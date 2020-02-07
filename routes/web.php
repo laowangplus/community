@@ -96,7 +96,8 @@ Route::post('publish/upload', 'Index\PublishController@upload');
 Route::get('check/{token}', 'Index\LoginController@check');
 
 //帖子展示
-Route::get('article/detail/{id}', 'Index\ArticleController@detail');
+Route::get('article/detail/{id}', 'Index\ArticleController@detail')
+    ->middleware('read');
 
 //帖子的修改编辑
 Route::get('article/edit/{article_id}', 'Index\ArticleController@edit');
