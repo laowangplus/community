@@ -346,12 +346,26 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     var othis = $(this);
     if(othis.hasClass(DISABLED)) return;
 
-    fly.json('/sign/in', {
-      token: signRender.token || 1
-    }, function(res){
-      signRender(res.data);
-    }, {
-      error: function(){
+    // fly.json('/user/sign', {
+    //   token: signRender.token || 1
+    // }, function(res){
+    //   alert(res);
+    //   signRender(res.data);
+    // }, {
+    //   error: function(){
+    //     alert(1);
+    //     othis.removeClass(DISABLED);
+    //   }
+    // });
+    $.ajax({
+      type: "GET",
+      url: "/user/sign",
+      dataType: "json",
+      success: function(res){
+        // alert(res.data);
+        signRender(res.data);
+      },
+      error: function () {
         othis.removeClass(DISABLED);
       }
     });

@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\Index\Article;
+use App\Http\Model\Index\Sign;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller {
@@ -18,9 +19,11 @@ class IndexController extends Controller {
         //猜你喜欢推荐文章
         $like_articles = Article::getArticlesByLike();
         $articles = Article::getTopArticle();
+        $sign = Sign::getSignInfo();
         return view('index.index', [
             'articles' => $articles,
             'like_articles' => $like_articles,
+            'sign' => $sign,
         ]);
     }
 }

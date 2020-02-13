@@ -149,17 +149,23 @@
                         <i class="fly-mid"></i>
                         <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜<span
                                     class="layui-badge-dot"></span></a>
-                        <span class="fly-signin-days">已连续签到<cite>16</cite>天</span>
+                        @if(Session::exists('id'))
+                            <span class="fly-signin-days">已连续签到<cite>{{$sign->days}}</cite>天</span>
+                        @endif
                     </div>
                     <div class="fly-panel-main fly-signin-main">
-                        <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
-                        <span>可获得<cite>5</cite>飞吻</span>
-
-                        <!-- 已签到状态 -->
-                        <!--
-                        <button class="layui-btn layui-btn-disabled">今日已签到</button>
-                        <span>获得了<cite>20</cite>飞吻</span>
-                        -->
+                        @if(Session::exists('id'))
+                            @if(Session::get('sign_status') == 0)
+                            <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
+                            <span>可获得<cite>{{$sign->experience}}</cite>飞吻</span>
+                            @else
+                            <!-- 已签到状态 -->
+                            <button class="layui-btn layui-btn-disabled">今日已签到</button>
+                            <span>获得了<cite>{{$sign->experience}}</cite>飞吻</span>
+                            @endif
+                        @else
+                            <a href="/register" class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</a>
+                        @endif
                     </div>
                 </div>
 

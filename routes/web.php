@@ -122,3 +122,6 @@ Route::get('article/top/{article_id}', 'Index\ArticleController@top');
 
 //文章精华
 Route::get('article/essence/{article_id}', 'Index\ArticleController@essence');
+
+//签到
+Route::get('user/sign', 'Index\SignController@todaySign');

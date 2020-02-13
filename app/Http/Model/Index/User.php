@@ -61,6 +61,13 @@ class User extends Model {
                         'last_login_time' => $_SERVER['REQUEST_TIME'],
                     ]);
 
+                $status = Sign::signStatus();
+                if ($status){
+                    $sign_status = 1;
+                }else{
+                    $sign_status = 0;
+                }
+
                 \Session::put([
                     'id' => $result->id,
                     'super' => $result->super,
@@ -74,6 +81,7 @@ class User extends Model {
                     'created_at' => $result->created_at,
                     'last_login_ip' => $result->last_login_ip,
                     'last_login_time' => date('Y-m-d H-i-s', $result->last_login_time),
+                    'sign_status' => $sign_status,
                 ]);
                 return True;
             } else {
