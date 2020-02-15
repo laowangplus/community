@@ -22,15 +22,25 @@ class ReadLimit {
         }else{
             $key = request()->ip();
         }
+
+        $flag = false;
+
         if (Redis::hexists('read_limit', $key.':'.$article_id)){
             $expires =  Redis::hget('read_limit', $key.':'.$article_id);
             if ($expires < $now){
-                $this->read($article_id);
-                Redis::hset('read_limit', $key.':'.$article_id, $now+config('setting.expires'));
+                $flag = true;
             }
         }else{
+            $flag = true;
+        }
+
+        if ($flag){
+            //通过访问限制之后的操作
+            //增加文章访问量
             $this->read($article_id);
             Redis::hset('read_limit', $key.':'.$article_id, $now+config('setting.expires'));
+            //增加文章所属标签的访问量
+            TagStatistics::view($article_id);
         }
     }
 

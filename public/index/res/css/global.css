@@ -295,8 +295,8 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .fly-rank dd a i{position:absolute; bottom: 0; left: 0; width: 100%; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: normal;}
 
 /* 静态列表 */
-.fly-list-static li{line-height: 26px; list-style-position: inside; list-style-type: disc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
-.fly-list-static li a{color: #01AAED;}
+.fly-list-static li{line-height: 36px; list-style-position: inside; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display:inline; margin-right: 10px;}
+.fly-list-static li a{color: #ffffff;}
 .fly-list-static li a:hover{opacity: 0.8;}
 
 /* 单行列表 */

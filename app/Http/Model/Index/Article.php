@@ -27,7 +27,8 @@ class Article extends Model {
             ->where('top', '=', 1)
             ->select('title', 'username', 'classname', 'comment_count', 'top',
                 'article.created_at as create_time', 'article.id as article_id',
-                'user.id as user_id', 'experience')
+                'user.id as user_id', 'experience', 'category.id as category_id',
+                'accept')
             ->get();
         if ($articles) {
             return $articles;
@@ -393,6 +394,10 @@ class Article extends Model {
                 'user.id as user_id', 'experience')
             ->get();
         return $articles;
+    }
+
+    public function searchArticles($keyword){
+
     }
 
 }

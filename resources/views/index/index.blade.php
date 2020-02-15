@@ -34,8 +34,10 @@
                                     <span>{{$article->create_time}}</span>
 
                                     <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i
-                                                class="iconfont icon-kiss"></i> 60</span>
+                                                class="iconfont icon-kiss"></i> {{$article->experience}}</span>
+                                    @if($article->category_id == 4 && $article->accept == 1)
                                     <span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>
+                                    @endif
                                     <span class="fly-list-nums">
                 <i class="iconfont icon-pinglun1" title="回答"></i> {{$article->comment_count}}
               </span>
@@ -77,7 +79,7 @@
                             </a>
                             <h2>
                                 <a class="layui-badge">{{$like_article->classname}}</a>
-                                <a href="{{url('article/detail/'.$article->article_id)}}">{{$like_article->title}}</a>
+                                <a href="{{url('article/detail/'.$like_article->article_id)}}">{{$like_article->title}}</a>
                             </h2>
                             <div class="fly-list-info">
                                 <a href="{{url('user/home/'.$article->user_id)}}" link>
@@ -113,30 +115,13 @@
             <div class="layui-col-md4">
 
                 <div class="fly-panel">
-                    <h3 class="fly-panel-title">温馨通道</h3>
+                    <h3 class="fly-panel-title">热门标签</h3>
                     <ul class="fly-panel-main fly-list-static">
+                        @foreach($hot_tags as $hot_tag)
                         <li>
-                            <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云)
-                                仓库，欢迎Star</a>
+                            <a class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius" href="http://fly.layui.com/jie/4281/" >{{$hot_tag->tag_name}}</a>
                         </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/5366/" target="_blank">
-                                layui 常见问题的处理和实用干货集锦
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云)
-                                仓库，欢迎Star</a>
-                        </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/5366/" target="_blank">
-                                layui 常见问题的处理和实用干货集锦
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://fly.layui.com/jie/4281/" target="_blank">layui 的 GitHub 及 Gitee (码云)
-                                仓库，欢迎Star</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -178,6 +163,11 @@
                                 <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
                             </a>
                         </dd>
+                        <dd>
+                            <a href="user/home.html">
+                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
+                            </a>
+                        </dd>
                     </dl>
                 </div>
 
@@ -198,13 +188,13 @@
                 <div class="fly-panel fly-link">
                     <h3 class="fly-panel-title">友情链接</h3>
                     <dl class="fly-panel-main">
-                        <dd><a href="http://www.layui.com/" target="_blank">layui</a>
+                        <dd><a href="http://www.layui.com/" >layui</a>
                         <dd>
-                        <dd><a href="http://layim.layui.com/" target="_blank">WebIM</a>
+                        <dd><a href="http://layim.layui.com/" >WebIM</a>
                         <dd>
-                        <dd><a href="http://layer.layui.com/" target="_blank">layer</a>
+                        <dd><a href="http://layer.layui.com/" >layer</a>
                         <dd>
-                        <dd><a href="http://www.layui.com/laydate/" target="_blank">layDate</a>
+                        <dd><a href="http://www.layui.com/laydate/" >layDate</a>
                         <dd>
                         <dd>
                             <a href="mailto:xianxin@layui-inc.com?subject=%E7%94%B3%E8%AF%B7Fly%E7%A4%BE%E5%8C%BA%E5%8F%8B%E9%93%BE"
