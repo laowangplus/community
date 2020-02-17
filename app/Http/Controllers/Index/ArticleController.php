@@ -107,5 +107,11 @@ class ArticleController extends Controller {
         ]);
     }
 
-
+    public function search($keyword){
+        $articles = Article::searchArticles($keyword);
+        return view('index.article.search_return', [
+            'articles' => $articles,
+            'keyword' => $keyword
+        ]);
+    }
 }

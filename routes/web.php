@@ -125,3 +125,6 @@ Route::get('article/essence/{article_id}', 'Index\ArticleController@essence');
 
 //签到
 Route::get('user/sign', 'Index\SignController@todaySign');
+
+//检索
+Route::get('article/search/{keyword}', 'Index\ArticleController@search');

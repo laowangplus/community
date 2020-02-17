@@ -1,39 +1,10 @@
 @extends('index.public.index')
 
 @section('title')
-    <title>首页</title>
+    <title>搜索结果--{{$keyword}}</title>
 @endsection
 
 @section('contain')
-    <div class="fly-panel fly-column">
-        <div class="layui-container">
-            <ul class="layui-clear">
-                <li class="layui-hide-xs layui-this"><a href="/">首页</a></li>
-                <li><a href="{{url('article/category/4')}}">提问</a></li>
-                <li><a href="{{url('article/category/2')}}">分享<span class="layui-badge-dot"></span></a></li>
-                <li><a href="{{url('article/category/3')}}">讨论</a></li>
-                <li><a href="{{url('article/category/1')}}">博文</a></li>
-                <li><a href="{{url('article/category/6')}}">公告</a></li>
-                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
-
-                <!-- 用户登入后显示 -->
-                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/article')}}">我发表的贴</a></li>
-                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/collection')}}">我收藏的贴</a>
-                </li>
-            </ul>
-
-            <div class="fly-column-right layui-hide-xs">
-                <span class="fly-search"><i class="layui-icon"></i></span>
-                <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-            </div>
-            <div class="layui-hide-sm layui-show-xs-block"
-                 style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
-                <span class="fly-search"><i class="layui-icon"></i></span>
-                <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-            </div>
-        </div>
-    </div>
-
     <div class="layui-container">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-md8">
@@ -97,8 +68,8 @@
                         <div style="text-align: center">
                             <div class="laypage-main">
                                 {{--@if($articles->total() <=0 )--}}
-                                {{--@elseif($articles->total() > 1 && $articles->total() < 5)--}}
-                                    {{--@if($articles->currentPage() > 1)--}}
+                                {{--@elseif($articles->total() > 1 && $articles->total() < $articles->perPage())--}}
+                                    {{--@if($articles->currentPage() > 5)--}}
                                         {{--<a href="{{url('?pager=1')}}" class="laypage-last" title="首页">首页</a>--}}
                                     {{--@endif--}}
                                     {{--<a href="{{$articles->previousPageUrl()}}" class="laypage-prev">上一页</a>--}}
@@ -120,7 +91,12 @@
                                         {{--<span>…</span>--}}
                                     {{--@endif--}}
                                     {{--@if($articles->currentPage() < 5)--}}
-                                        {{--@for($i=1; $i<=5; $i++)--}}
+                                        {{--@if($articles->lastPage() > 5)--}}
+                                            {{--{{$showPage = 5}}--}}
+                                        {{--@else--}}
+                                            {{--{{$showPage = $articles->lastPage()}}--}}
+                                        {{--@endif--}}
+                                        {{--@for($i=1; $i<=$showPage; $i++)--}}
                                             {{--@if($i == $articles->currentPage())--}}
                                                 {{--<span class="laypage-curr">{{$i}}</span>--}}
                                             {{--@else--}}
@@ -145,12 +121,16 @@
                                         {{--@endfor--}}
                                     {{--@endif--}}
 
-                                    {{--@if($articles->currentPage() <= $articles->total()-4)--}}
+                                    {{--@if($articles->currentPage() <= $articles->total()-4 && $articles->total()<5)--}}
                                         {{--<span>…</span>--}}
                                     {{--@endif--}}
                                     {{--<a href="{{$articles->nextPageUrl()}}" class="laypage-next">下一页</a>--}}
                                     {{--<a href="{{ url('?pager='.$articles->total()) }}" class="laypage-last" title="尾页">尾页</a>--}}
                                 {{--@endif--}}
+
+
+                                {{$articles->links('vendor.pagination.default')}}
+
 
                                 {{--<span class="laypage-curr">1</span>--}}
                                 {{--<a href="/jie/page/2/">2</a>--}}
@@ -160,9 +140,6 @@
                                 {{--<span>…</span>--}}
                                 {{--<a href="/jie/page/148/" class="laypage-last" title="尾页">尾页</a>--}}
                                 {{--<a href="/jie/page/2/" class="laypage-next">下一页</a>--}}
-
-                                {{$articles->links('vendor.pagination.default')}}
-
                             </div>
                         </div>
                     </ul>

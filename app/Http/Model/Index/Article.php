@@ -11,6 +11,7 @@ namespace App\Http\Model\Index;
 
 use App\Exceptions\ErrorException;
 use App\Exceptions\MessageException;
+use App\Http\Service\SearchService;
 use App\Http\Service\YourLike;
 use Doctrine\DBAL\Driver\PDOException;
 use Illuminate\Database\Eloquent\Model;
@@ -396,8 +397,27 @@ class Article extends Model {
         return $articles;
     }
 
-    public function searchArticles($keyword){
+    public static function searchArticles($keyword){
+//        $articles = DB::table('article')
+//            ->join('category', 'category.id', '=', 'category_id')
+//            ->join('user', 'user.id', '=', 'user_id')
+//            ->select('title', 'username', 'classname', 'comment_count',
+//                'article.created_at as create_time', 'article.id as article_id',
+//                'user.id as user_id', 'experience', 'content', 'tag')
+//            ->get();
 
+        $service =new SearchService();
+        $article_ids = $service->searchArticle($keyword);
+        $articles = DB::table('article')
+            ->join('category', 'category.id', '=', 'category_id')
+            ->join('user', 'user.id', '=', 'user_id')
+            ->whereIn('article.id',$article_ids)
+            ->select('title', 'username', 'classname', 'comment_count',
+                'article.created_at as create_time', 'article.id as article_id',
+                'user.id as user_id', 'experience', 'accept', 'top', 'essence')
+            ->paginate(20);
+//        dd($articles);
+        return $articles;
     }
 
 }

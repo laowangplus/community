@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends Controller {
     public function index(){
         //猜你喜欢推荐文章
+//        dd(\Session::get('sign_status'));
         $like_articles = Article::getArticlesByLike();
         $articles = Article::getTopArticle();
         $sign = Sign::getSignInfo();

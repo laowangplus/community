@@ -19,13 +19,13 @@
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
-                <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
+                <a href="/"><i class="iconfont icon-jiaoliu"></i>社畜区</a>
             </li>
             <li class="layui-nav-item">
-                <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
+                <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>绅士区</a>
             </li>
             <li class="layui-nav-item">
-                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
+                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
             </li>
         </ul>
 
@@ -91,44 +91,13 @@
 
 <div class="cxt_nav_wp">
     <ul class="cxt_nav layui-clear">
-        <li class="layui-this"><a href="/Post/column/all/all">All</a></li>
-        <li><a href="/Post/column/android">Android</a></li>
-        <li><a href="/Post/column/ios">IOS</a></li>
-        <li><a href="/Post/column/java">JAVA</a></li>
-        <li><a href="/Post/column/php">PHP</a></li>
-        <li><a href="/Post/column/web">WEB</a></li>
-        <li><a href="/Post/column/h5Game">H5Game</a></li>
+        <li><a href="/Post/column/php">社畜区</a></li>
+        <li><a href="/Post/column/web">绅士区</a></li>
+        <li><a href="/Post/column/h5Game">交流区</a></li>
     </ul>
 </div>
 
-<div class="fly-panel fly-column">
-    <div class="layui-container">
-        <ul class="layui-clear">
-            <li class="layui-hide-xs layui-this"><a href="/">首页</a></li>
-            <li><a href="{{url('article/category/4')}}">提问</a></li>
-            <li><a href="{{url('article/category/2')}}">分享<span class="layui-badge-dot"></span></a></li>
-            <li><a href="{{url('article/category/3')}}">讨论</a></li>
-            <li><a href="{{url('article/category/1')}}">博文</a></li>
-            <li><a href="{{url('article/category/6')}}">公告</a></li>
-            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
-            <!-- 用户登入后显示 -->
-            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/article')}}">我发表的贴</a></li>
-            <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/collection')}}">我收藏的贴</a>
-            </li>
-        </ul>
-
-        <div class="fly-column-right layui-hide-xs">
-            <span class="fly-search"><i class="layui-icon"></i></span>
-            <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-        </div>
-        <div class="layui-hide-sm layui-show-xs-block"
-             style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
-            <span class="fly-search"><i class="layui-icon"></i></span>
-            <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-        </div>
-    </div>
-</div>
 
 @yield('contain')
 
