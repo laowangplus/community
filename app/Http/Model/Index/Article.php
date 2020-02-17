@@ -43,7 +43,7 @@ class Article extends Model {
             ->select('title', 'username', 'comment_count',
                 'article.created_at as create_time', 'article.id as article_id',
                 'user.id as user_id', 'experience', 'accept', 'top', 'essence')
-            ->paginate(1);
+            ->paginate(10);
         if ($result) {
             return $result;
         }
@@ -83,6 +83,8 @@ class Article extends Model {
                     ]);
                 }
             }
+
+            return $article_id;
 
         } catch (PDOException $e) {
             throw new ErrorException([

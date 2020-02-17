@@ -51,7 +51,7 @@ class ArticleController extends Controller {
             $data = ArticleCheck::validate();
             $data['id'] = $article_id;
             Article::updateArticle($data);
-            return redirect('/article/edit/'.$article_id);
+            return redirect('/article/detail/'.$article_id);
         }
         $article = Article::getArticleDetail($article_id);
         $categorys = Category::getCategoryByIdentity();

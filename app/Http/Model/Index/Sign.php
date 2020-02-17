@@ -24,7 +24,6 @@ class Sign extends Model {
             'user_id' => $user_id,
             'sign_date' => $today,
         ])->first();
-        dd($existToday);
         if ($existToday){
             return Json::encode([
                 'sign' => 0,

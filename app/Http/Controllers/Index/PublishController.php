@@ -20,7 +20,8 @@ class PublishController extends Controller {
     public function add(Request $request){
         if ($request->isMethod('post')){
             $data = ArticleCheck::validate();
-            Article::createArticle($data);
+            $article_id = Article::createArticle($data);
+            return redirect('/article/detail/'.$article_id);
         }
         $categorys = Category::getCategoryByIdentity()->toArray();
         return view('index/publish/add', [
