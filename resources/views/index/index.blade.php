@@ -47,8 +47,8 @@
                         @foreach($articles as $article)
                             <li>
                                 <a href="{{url('user/home/'.$article->user_id)}}" class="fly-avatar">
-                                    <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                                         alt="贤心">
+                                    <img src="{{$article->img_url}}"
+                                         alt="{{$article->username}}">
                                 </a>
                                 <h2>
                                     <a class="layui-badge">{{$article->classname}}</a>
@@ -92,19 +92,19 @@
                         {{--<a href="">已结</a>--}}
                         {{--<span class="fly-mid"></span>--}}
                         {{--<a href="">精华</a>--}}
-                        <span class="fly-filter-right layui-hide-xs">
-            <a href="" class="layui-this">按最新</a>
-            <span class="fly-mid"></span>
-            <a href="">按热议</a>
+                        {{--<span class="fly-filter-right layui-hide-xs">--}}
+            {{--<a href="" class="layui-this">按最新</a>--}}
+            {{--<span class="fly-mid"></span>--}}
+            {{--<a href="">按热议</a>--}}
           </span>
                     </div>
 
                     <ul class="fly-list">
                         @foreach($like_articles as $like_article)
                         <li>
-                            <a href="{{url('user/home/'.$article->user_id)}}" class="fly-avatar">
-                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                                     alt="贤心">
+                            <a href="{{url('user/home/'.$like_article->user_id)}}" class="fly-avatar">
+                                <img src="{{url($like_article->img_url)}}"
+                                     alt="{{$like_article->username}}">
                             </a>
                             <h2>
                                 <a class="layui-badge">{{$like_article->classname}}</a>

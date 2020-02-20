@@ -26,7 +26,7 @@ class Article extends Model {
             ->join('category', 'category.id', '=', 'category_id')
             ->join('user', 'user.id', '=', 'user_id')
             ->where('top', '=', 1)
-            ->select('title', 'username', 'classname', 'comment_count', 'top',
+            ->select('title', 'username', 'img_url','classname', 'comment_count', 'top',
                 'article.created_at as create_time', 'article.id as article_id',
                 'user.id as user_id', 'experience', 'category.id as category_id',
                 'accept')
@@ -40,7 +40,7 @@ class Article extends Model {
         $result = DB::table('article')
             ->join('user', 'user.id', '=', 'user_id')
             ->where('category_id', '=', $category_id)
-            ->select('title', 'username', 'comment_count',
+            ->select('title', 'username', 'img_url', 'comment_count',
                 'article.created_at as create_time', 'article.id as article_id',
                 'user.id as user_id', 'experience', 'accept', 'top', 'essence')
             ->paginate(10);
@@ -392,7 +392,7 @@ class Article extends Model {
 //                    ->select('article_id as id');
 //            })
             ->whereIn('article.id', $article_ids)
-            ->select('title', 'username', 'classname', 'comment_count',
+            ->select('title', 'username', 'img_url', 'classname', 'comment_count',
                 'article.created_at as create_time', 'article.id as article_id',
                 'user.id as user_id', 'experience')
             ->get();

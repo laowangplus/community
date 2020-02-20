@@ -58,8 +58,8 @@
                         @foreach($articles as $article)
                             <li>
                                 <a href="{{url('user/home/'.$article->user_id)}}" class="fly-avatar">
-                                    <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
-                                         alt="贤心">
+                                    <img src="{{url($article->img_url)}}"
+                                         alt="{{$article->username}}">
                                 </a>
                                 <h2>
                                     <a href="{{url('article/detail/'.$article->article_id)}}">{{ $article->title }}</a>
