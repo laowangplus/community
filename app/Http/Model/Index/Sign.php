@@ -42,7 +42,7 @@ class Sign extends Model {
         }else{
             $days = 1;
         }
-
+        DB::beginTransaction();
         $result = DB::table('sign')
             ->insert([
                 'user_id' => $user_id,
@@ -51,8 +51,9 @@ class Sign extends Model {
                 'created_at' => $now,
             ]);
         if ($result){
-            $experience = self::experienceRule($existYesterday->days);//编辑功能判断当天可通过签到获取的飞吻数
+            $experience = self::experienceRule($days);//编辑功能判断当天可通过签到获取的飞吻数
             \Session::put('sign_status', 1);
+            DB::commit();
             return Json::encode([
                 'sign' => 1,
                 'data' => [
@@ -62,6 +63,7 @@ class Sign extends Model {
                 ],
             ]);
         }else{
+            DB::rollBack();
             throw new ErrorException();
         }
     }
