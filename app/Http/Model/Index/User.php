@@ -61,7 +61,7 @@ class User extends Model {
                         'last_login_time' => $_SERVER['REQUEST_TIME'],
                     ]);
 
-                $status = Sign::signStatus();
+                $status = Sign::signStatus($result->id);
                 if ($status){
                     $sign_status = 1;
                 }else{

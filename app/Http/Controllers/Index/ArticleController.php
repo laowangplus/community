@@ -23,9 +23,11 @@ use Psy\Util\Json;
 class ArticleController extends Controller {
     public function articleByCategory($category_id){
         $articles = Article::getArticlesByCategory($category_id);
+        $categorys = Category::getCategoryByIdentity();
         return view('index.article.category', [
             'articles' => $articles,
             'category_id' => $category_id,
+            'categorys' => $categorys
         ]);
     }
 

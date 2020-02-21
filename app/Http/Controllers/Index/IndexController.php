@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Index;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\Index\Article;
+use App\Http\Model\Index\Category;
 use App\Http\Model\Index\Sign;
 use App\Http\Service\TagStatistics;
 use Illuminate\Support\Facades\DB;
@@ -22,12 +23,14 @@ class IndexController extends Controller {
         $like_articles = Article::getArticlesByLike();
         $articles = Article::getTopArticle();
         $sign = Sign::getSignInfo();
+        $categorys = Category::getCategoryByIdentity();
         $hot_tags = TagStatistics::getTags();
         return view('index.index', [
             'articles' => $articles,
             'like_articles' => $like_articles,
             'sign' => $sign,
-            'hot_tags' => $hot_tags
+            'hot_tags' => $hot_tags,
+            'categorys' => $categorys,
         ]);
     }
 }

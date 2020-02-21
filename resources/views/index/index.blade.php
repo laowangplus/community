@@ -8,12 +8,10 @@
     <div class="fly-panel fly-column">
         <div class="layui-container">
             <ul class="layui-clear">
-                <li class="layui-hide-xs layui-this"><a href="/">首页</a></li>
-                <li><a href="{{url('article/category/4')}}">提问</a></li>
-                <li><a href="{{url('article/category/2')}}">分享<span class="layui-badge-dot"></span></a></li>
-                <li><a href="{{url('article/category/3')}}">讨论</a></li>
-                <li><a href="{{url('article/category/1')}}">博文</a></li>
-                <li><a href="{{url('article/category/6')}}">公告</a></li>
+                <li  class="layui-hide-xs layui-this"><a href="/">首页</a></li>
+                @foreach($categorys as $category)
+                        <li><a href="{{url('article/category/'.$category->id)}}">{{$category->classname}}</a></li>
+                @endforeach
                 <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
                 <!-- 用户登入后显示 -->
@@ -214,23 +212,23 @@
                 </dl>
 
 
-                <div class="fly-panel fly-link">
-                    <h3 class="fly-panel-title">友情链接</h3>
-                    <dl class="fly-panel-main">
-                        <dd><a href="http://www.layui.com/" >layui</a>
-                        <dd>
-                        <dd><a href="http://layim.layui.com/" >WebIM</a>
-                        <dd>
-                        <dd><a href="http://layer.layui.com/" >layer</a>
-                        <dd>
-                        <dd><a href="http://www.layui.com/laydate/" >layDate</a>
-                        <dd>
-                        <dd>
-                            <a href="mailto:xianxin@layui-inc.com?subject=%E7%94%B3%E8%AF%B7Fly%E7%A4%BE%E5%8C%BA%E5%8F%8B%E9%93%BE"
-                               class="fly-link">申请友链</a>
-                        <dd>
-                    </dl>
-                </div>
+                {{--<div class="fly-panel fly-link">--}}
+                    {{--<h3 class="fly-panel-title">友情链接</h3>--}}
+                    {{--<dl class="fly-panel-main">--}}
+                        {{--<dd><a href="http://www.layui.com/" >layui</a>--}}
+                        {{--<dd>--}}
+                        {{--<dd><a href="http://layim.layui.com/" >WebIM</a>--}}
+                        {{--<dd>--}}
+                        {{--<dd><a href="http://layer.layui.com/" >layer</a>--}}
+                        {{--<dd>--}}
+                        {{--<dd><a href="http://www.layui.com/laydate/" >layDate</a>--}}
+                        {{--<dd>--}}
+                        {{--<dd>--}}
+                            {{--<a href="mailto:xianxin@layui-inc.com?subject=%E7%94%B3%E8%AF%B7Fly%E7%A4%BE%E5%8C%BA%E5%8F%8B%E9%93%BE"--}}
+                               {{--class="fly-link">申请友链</a>--}}
+                        {{--<dd>--}}
+                    {{--</dl>--}}
+                {{--</div>--}}
 
             </div>
         </div>

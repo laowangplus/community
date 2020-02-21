@@ -100,8 +100,7 @@ class Sign extends Model {
     }
 
     //今日是否签到
-    public static function signStatus(){
-        $user_id = \Session::get('id');
+    public static function signStatus($user_id){
         $today = date("Y-m-d", $_SERVER['REQUEST_TIME']);
         $existToday = DB::table('sign')->where([
             'user_id' => $user_id,
