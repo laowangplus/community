@@ -25,7 +25,7 @@
                 <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>绅士区</a>
             </li>
             <li class="layui-nav-item">
-                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
+                <a href="{{url('/chat')}}" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
             </li>
         </ul>
 

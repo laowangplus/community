@@ -128,3 +128,13 @@ Route::get('user/sign', 'Index\SignController@todaySign');
 
 //检索
 Route::get('article/search/{keyword}', 'Index\ArticleController@search');
+
+
+
+/**聊天室界面**/
+//聊天室列表
+Route::get('chat', 'Index\ChatController@index');
+
+//聊天室
+Route::get('chat/room', 'Index\ChatController@room');
+
