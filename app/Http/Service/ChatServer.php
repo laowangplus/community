@@ -31,7 +31,6 @@ class ChatServer {
     }
 
     public function checkToken() {
-        \Session::remove('token');
         if (!\Session::exists('token')) {
             return false;
         }
