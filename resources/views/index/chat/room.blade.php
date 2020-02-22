@@ -25,16 +25,16 @@
                 <div class="popover fade bottom in">
                     <div class="arrow"></div>
                     <h3 class="popover-title">在线用户{{count($live_users)}}人</h3>
-                    <div class="popover-content scrollbar-macosx">
-                        <ul>
-                            @foreach($live_users as $live_user)
-                            <li>
-                                <img src="{{$live_user['img_url']}}" alt="{{$live_user['username']}}">
-                                <b>{{$live_user['username']}}</b>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    {{--<div class="popover-content scrollbar-macosx">--}}
+                        {{--<ul>--}}
+                            {{--@foreach($live_users as $live_user)--}}
+                            {{--<li>--}}
+                                {{--<img src="{{$live_user['img_url']}}" alt="{{$live_user['username']}}">--}}
+                                {{--<b>{{$live_user['username']}}</b>--}}
+                            {{--</li>--}}
+                            {{--@endforeach--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
                 </div>
             </li>
         </ul>
