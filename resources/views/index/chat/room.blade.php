@@ -15,7 +15,7 @@
 <div class="scrollbar-macosx">
     <div class="header">
         <div class="toptext">
-            <a href="index.html">
+            <a href="/">
                 <span class="glyphicon glyphicon-arrow-left"></span> 返回大厅
             </a>
         </div>
@@ -189,9 +189,7 @@
 
     //websocket连接
     var ws = new WebSocket("ws://47.102.205.111:9503/{{$token}}");
-    ws.onopen = function(evt) {
-        console.log(evt);
-    };
+
     ws.onmessage = function(evt) {
         let data = JSON.parse(evt.data);
         console.log("Received Message: " + evt.data);
