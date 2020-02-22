@@ -46,7 +46,15 @@
                 {{--<li class="systeminfo">--}}
                     {{--<span>【绿巨人】加入了房间</span>--}}
                 {{--</li>--}}
-                {{--<li class="left">--}}
+                @foreach($chatRecords as $chatRecord)
+                    <li class="left">
+                    <img src="{{$chatRecord->img_url}}" alt="">
+                    <b>{{$chatRecord->username}}</b>
+                    <i>{{date("H:i:s", $chatRecord->create_time)}}</i>
+                    <div>{{$chatRecord->msg}}</div>
+                    </li>
+                @endforeach
+                    {{--<li class="left">--}}
                     {{--<img src="images/user/12.png" alt="">--}}
                     {{--<b>美国队长</b>--}}
                     {{--<i>09:15</i>--}}

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Index;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Model\Index\Chat;
 use App\Http\Service\ChatServer;
 
 class ChatController extends Controller {
@@ -26,10 +27,13 @@ class ChatController extends Controller {
             'img_url' => \Session::get('img_url')
         ];
         $live_users = $chat->getLiveUsers();
+
+        $chatRecords = Chat::getChatRecord(20);
         return view('index.chat.room', [
             'token' => $token,
             'user_info' => $user_info,
             'live_users' => $live_users,
+            'chatRecords' => $chatRecords,
         ]);
     }
 }
