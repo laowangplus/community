@@ -67,80 +67,9 @@
                     <div class="arrow"></div>
                     <h3 class="popover-title">表情包</h3>
                     <div class="popover-content scrollbar-macosx">
-                        <img src="/index/chat/images/face/1.gif" alt="1">
-                        <img src="/index/chat/images/face/2.gif" alt="2">
-                        <img src="/index/chat/images/face/3.gif" alt="3">
-                        <img src="/index/chat/images/face/4.gif" alt="4">
-                        <img src="/index/chat/images/face/5.gif" alt="5">
-                        <img src="/index/chat/images/face/6.gif" alt="6">
-                        <img src="/index/chat/images/face/7.gif" alt="7">
-                        <img src="/index/chat/images/face/8.gif" alt="8">
-                        <img src="/index/chat/images/face/9.gif" alt="9">
-                        <img src="/index/chat/images/face/10.gif" alt="10">
-                        <img src="/index/chat/images/face/11.gif" alt="11">
-                        <img src="/index/chat/images/face/12.gif" alt="">
-                        <img src="/index/chat/images/face/13.gif" alt="">
-                        <img src="/index/chat/images/face/14.gif" alt="">
-                        <img src="/index/chat/images/face/15.gif" alt="">
-                        <img src="/index/chat/images/face/16.gif" alt="">
-                        <img src="/index/chat/images/face/17.gif" alt="">
-                        <img src="/index/chat/images/face/18.gif" alt="">
-                        <img src="/index/chat/images/face/19.gif" alt="">
-                        <img src="/index/chat/images/face/20.gif" alt="">
-                        <img src="/index/chat/images/face/21.gif" alt="">
-                        <img src="/index/chat/images/face/22.gif" alt="">
-                        <img src="/index/chat/images/face/23.gif" alt="">
-                        <img src="/index/chat/images/face/24.gif" alt="">
-                        <img src="/index/chat/images/face/25.gif" alt="">
-                        <img src="/index/chat/images/face/26.gif" alt="">
-                        <img src="/index/chat/images/face/27.gif" alt="">
-                        <img src="/index/chat/images/face/28.gif" alt="">
-                        <img src="/index/chat/images/face/29.gif" alt="">
-                        <img src="/index/chat/images/face/30.gif" alt="">
-                        <img src="/index/chat/images/face/31.gif" alt="">
-                        <img src="/index/chat/images/face/32.gif" alt="">
-                        <img src="/index/chat/images/face/33.gif" alt="">
-                        <img src="/index/chat/images/face/34.gif" alt="">
-                        <img src="/index/chat/images/face/35.gif" alt="">
-                        <img src="/index/chat/images/face/36.gif" alt="">
-                        <img src="/index/chat/images/face/37.gif" alt="">
-                        <img src="/index/chat/images/face/38.gif" alt="">
-                        <img src="/index/chat/images/face/39.gif" alt="">
-                        <img src="/index/chat/images/face/40.gif" alt="">
-                        <img src="/index/chat/images/face/41.gif" alt="">
-                        <img src="/index/chat/images/face/42.gif" alt="">
-                        <img src="/index/chat/images/face/43.gif" alt="">
-                        <img src="/index/chat/images/face/44.gif" alt="">
-                        <img src="/index/chat/images/face/45.gif" alt="">
-                        <img src="/index/chat/images/face/46.gif" alt="">
-                        <img src="/index/chat/images/face/47.gif" alt="">
-                        <img src="/index/chat/images/face/48.gif" alt="">
-                        <img src="/index/chat/images/face/49.gif" alt="">
-                        <img src="/index/chat/images/face/50.gif" alt="">
-                        <img src="/index/chat/images/face/51.gif" alt="">
-                        <img src="/index/chat/images/face/52.gif" alt="">
-                        <img src="/index/chat/images/face/53.gif" alt="">
-                        <img src="/index/chat/images/face/54.gif" alt="">
-                        <img src="/index/chat/images/face/55.gif" alt="">
-                        <img src="/index/chat/images/face/56.gif" alt="">
-                        <img src="/index/chat/images/face/57.gif" alt="">
-                        <img src="/index/chat/images/face/58.gif" alt="">
-                        <img src="/index/chat/images/face/59.gif" alt="">
-                        <img src="/index/chat/images/face/60.gif" alt="">
-                        <img src="/index/chat/images/face/61.gif" alt="">
-                        <img src="/index/chat/images/face/62.gif" alt="">
-                        <img src="/index/chat/images/face/63.gif" alt="">
-                        <img src="/index/chat/images/face/64.gif" alt="">
-                        <img src="/index/chat/images/face/65.gif" alt="">
-                        <img src="/index/chat/images/face/66.gif" alt="">
-                        <img src="/index/chat/images/face/67.gif" alt="">
-                        <img src="/index/chat/images/face/68.gif" alt="">
-                        <img src="/index/chat/images/face/69.gif" alt="">
-                        <img src="/index/chat/images/face/70.gif" alt="">
-                        <img src="/index/chat/images/face/71.gif" alt="">
-                        <img src="/index/chat/images/face/72.gif" alt="">
-                        <img src="/index/chat/images/face/73.gif" alt="">
-                        <img src="/index/chat/images/face/75.gif" alt="">
+                        @for($i=1; $i<=75; $i++)
+                            <img src="/index/chat/images/face/{{$i}}.gif" alt="{{$i}}">
+                        @endfor
                     </div>
                 </div>
             </div>
@@ -159,6 +88,10 @@
 <script>
     //发送信息
     function sends_message (userName, userPortrait, message) {
+        message = message.replace(/\</g,'&lt;');
+        message = message.replace(/\>/g,'&gt;');
+        message = message.replace(/\n/g,'<br/>');
+        message = message.replace(/\[em_([0-9]*)\]/g,'<img src="{{asset('index/chat/images/face/$1.gif')}}" alt="" />');
         var date = new Date();
         var Hours = date.getHours();
         var minutes = date.getMinutes() + 1;
