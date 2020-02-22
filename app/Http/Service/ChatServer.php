@@ -35,6 +35,9 @@ class ChatServer {
             return false;
         }
         $token = \Session::get('token');
+        if (!Redis::hgetall($token)){
+            return false;
+        }
         return $token;
 
     }
