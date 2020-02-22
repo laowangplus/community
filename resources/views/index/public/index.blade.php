@@ -25,7 +25,7 @@
                 <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>绅士区</a>
             </li>
             <li class="layui-nav-item">
-                <a href="{{url('/chat')}}" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
+                <a href="{{url('/chat/room')}}" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
             </li>
         </ul>
 
@@ -93,7 +93,7 @@
     <ul class="cxt_nav layui-clear">
         <li><a href="/Post/column/php">社畜区</a></li>
         <li><a href="/Post/column/web">绅士区</a></li>
-        <li><a href="/Post/column/h5Game">交流区</a></li>
+        <li><a href="{{url('/chat/room')}}">交流区</a></li>
     </ul>
 </div>
 
