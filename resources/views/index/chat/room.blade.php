@@ -196,7 +196,7 @@
 
 
     //websocket连接
-    var ws = new WebSocket("ws://47.102.205.111:9503/{{$token}}");
+    var ws = new WebSocket("ws://chat.laowangplus.top/chat?token={{$token}}");
 
     ws.onmessage = function(evt) {
         let data = JSON.parse(evt.data);
