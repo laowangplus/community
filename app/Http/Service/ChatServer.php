@@ -36,6 +36,7 @@ class ChatServer {
         }
         $token = \Session::get('token');
         if (!Redis::hgetall($token)){
+            Redis::hdel('live_users', $token);
             return false;
         }
         return $token;
