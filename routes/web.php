@@ -127,7 +127,7 @@ Route::get('article/essence/{article_id}', 'Index\ArticleController@essence');
 Route::get('user/sign', 'Index\SignController@todaySign');
 
 //检索
-Route::get('article/search/{keyword}', 'Index\ArticleController@search');
+Route::any('article/search', 'Index\ArticleController@search');
 
 
 

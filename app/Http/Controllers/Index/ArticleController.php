@@ -109,7 +109,8 @@ class ArticleController extends Controller {
         ]);
     }
 
-    public function search($keyword){
+    public function search(){
+        $keyword = \request()->get('q');
         $articles = Article::searchArticles($keyword);
         return view('index.article.search_return', [
             'articles' => $articles,

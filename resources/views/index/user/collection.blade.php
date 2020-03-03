@@ -1,7 +1,7 @@
 @extends('index.public.index')
 
 @section('title')
-    <title>用户中心</title>
+    <title>个人收集</title>
 @endsection
 
 @section('contain')

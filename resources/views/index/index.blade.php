@@ -1,7 +1,7 @@
 @extends('index.public.index')
 
 @section('title')
-    <title>首页</title>
+    <title>学习分享社区-首页</title>
 @endsection
 
 @section('contain')
