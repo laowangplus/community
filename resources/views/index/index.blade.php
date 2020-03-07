@@ -10,7 +10,7 @@
             <ul class="layui-clear">
                 <li  class="layui-hide-xs layui-this"><a href="/">首页</a></li>
                 @foreach($categorys as $category)
-                        <li><a href="{{url('article/category/'.$category->id)}}">{{$category->classname}}</a></li>
+                    <li><a href="{{url('article/category/'.$category->id)}}">{{$category->classname}}</a></li>
                 @endforeach
                 <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
