@@ -46,14 +46,14 @@
                 {{--<li class="systeminfo">--}}
                     {{--<span>【绿巨人】加入了房间</span>--}}
                 {{--</li>--}}
-                @foreach($chatRecords as $chatRecord)
-                    <li class="left">
-                    <img src="{{$chatRecord->img_url}}" alt="">
-                    <b>{{$chatRecord->username}}</b>
-                    <i>{{date("H:i:s", $chatRecord->create_time)}}</i>
-                    <div>{{$chatRecord->msg}}</div>
-                    </li>
-                @endforeach
+                {{--@foreach($chatRecords as $chatRecord)--}}
+                    {{--<li class="left">--}}
+                    {{--<img src="{{$chatRecord->img_url}}" alt="">--}}
+                    {{--<b>{{$chatRecord->username}}</b>--}}
+                    {{--<i>{{date("H:i:s", $chatRecord->create_time)}}</i>--}}
+                    {{--<div>{{$chatRecord->msg}}</div>--}}
+                    {{--</li>--}}
+                {{--@endforeach--}}
                     {{--<li class="left">--}}
                     {{--<img src="images/user/12.png" alt="">--}}
                     {{--<b>美国队长</b>--}}
@@ -68,7 +68,7 @@
             <div class="tools">
 
                 <span class="glyphicon glyphicon-heart face_btn"></span>
-                <span class="glyphicon glyphicon-picture imgFileico"></span>
+                {{--<span class="glyphicon glyphicon-picture imgFileico"></span>--}}
 
                 <input type="file" class="imgFileBtn hidden" accept="image/*">
                 <div class="faces popover fade top in">
