@@ -15,20 +15,40 @@
                 <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
 
                 <!-- 用户登入后显示 -->
-                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/article')}}">我发表的贴</a></li>
-                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/collection')}}">我收藏的贴</a>
-                </li>
+                @if(Session::exists('id'))
+                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/article')}}">我发表的贴</a></li>
+                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="{{url('user/collection')}}">我收藏的贴</a>
+                    </li>
+                @endif
+
             </ul>
 
-            <div class="fly-column-right layui-hide-xs">
-                <span class="fly-search"><i class="layui-icon"></i></span>
-                <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-            </div>
-            <div class="layui-hide-sm layui-show-xs-block"
-                 style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
-                <span class="fly-search"><i class="layui-icon"></i></span>
-                <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
-            </div>
+            @if(Session::exists('id'))
+                <div class="fly-column-right layui-hide-xs">
+                    <span class="fly-search"><i class="layui-icon"></i></span>
+                    <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
+                </div>
+            @else
+                <div class="fly-column-right layui-hide-xs">
+                    <span class="fly-search"><i class="layui-icon"></i></span>
+                    <a href="{{ url('login') }}" class="layui-btn">发表新帖</a>
+                </div>
+            @endif
+
+            @if(Session::exists('id'))
+                <div class="layui-hide-sm layui-show-xs-block"
+                     style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
+                    <span class="fly-search"><i class="layui-icon"></i></span>
+                    <a href="{{ url('publish/add') }}" class="layui-btn">发表新帖</a>
+                </div>
+            @else
+                <div class="layui-hide-sm layui-show-xs-block"
+                     style="margin-top: -10px; padding-bottom: 10px; text-align: center;">
+                    <span class="fly-search"><i class="layui-icon"></i></span>
+                    <a href="{{ url('/login') }}" class="layui-btn">发表新帖</a>
+                </div>
+            @endif
+
         </div>
     </div>
 
@@ -146,7 +166,7 @@
                     <ul class="fly-panel-main fly-list-static">
                         @foreach($hot_tags as $hot_tag)
                         <li>
-                            <a class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius" href="http://fly.layui.com/jie/4281/" >{{$hot_tag->tag_name}}</a>
+                            <a class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius" href="{{url('/article/search?q='.$hot_tag->tag_name)}}" >{{$hot_tag->tag_name}}</a>
                         </li>
                         @endforeach
                     </ul>
@@ -159,8 +179,8 @@
                         <i class="fly-mid"></i>
                         <a href="javascript:;" class="fly-link" id="LAY_signinHelp">说明</a>
                         <i class="fly-mid"></i>
-                        <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜<span
-                                    class="layui-badge-dot"></span></a>
+                        {{--<a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜<span--}}
+                                    {{--class="layui-badge-dot"></span></a>--}}
                         @if(Session::exists('id'))
                             <span class="fly-signin-days">已连续签到<cite>{{$sign->days}}</cite>天</span>
                         @endif
@@ -181,35 +201,35 @@
                     </div>
                 </div>
 
-                <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
-                    <h3 class="fly-panel-title">回贴周榜</h3>
-                    <dl>
-                        <!--<i class="layui-icon fly-loading">&#xe63d;</i>-->
-                        <dd>
-                            <a href="user/home.html">
-                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-                            </a>
-                        </dd>
-                        <dd>
-                            <a href="user/home.html">
-                                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>
-                            </a>
-                        </dd>
-                    </dl>
-                </div>
+                {{--<div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">--}}
+                    {{--<h3 class="fly-panel-title">回贴周榜</h3>--}}
+                    {{--<dl>--}}
+                        {{--<!--<i class="layui-icon fly-loading">&#xe63d;</i>-->--}}
+                        {{--<dd>--}}
+                            {{--<a href="user/home.html">--}}
+                                {{--<img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>--}}
+                            {{--</a>--}}
+                        {{--</dd>--}}
+                        {{--<dd>--}}
+                            {{--<a href="user/home.html">--}}
+                                {{--<img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"><cite>贤心</cite><i>106次回答</i>--}}
+                            {{--</a>--}}
+                        {{--</dd>--}}
+                    {{--</dl>--}}
+                {{--</div>--}}
 
-                <dl class="fly-panel fly-list-one">
-                    <dt class="fly-panel-title">本周热议</dt>
-                    <dd>
-                        <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
-                        <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                    </dd>
+                {{--<dl class="fly-panel fly-list-one">--}}
+                    {{--<dt class="fly-panel-title">本周热议</dt>--}}
+                    {{--<dd>--}}
+                        {{--<a href="jie/detail.html">基于 layui 的极简社区页面模版</a>--}}
+                        {{--<span><i class="iconfont icon-pinglun1"></i> 16</span>--}}
+                    {{--</dd>--}}
 
-                    <!-- 无数据时 -->
-                    <!--
-                    <div class="fly-none">没有相关数据</div>
-                    -->
-                </dl>
+                    {{--<!-- 无数据时 -->--}}
+                    {{--<!----}}
+                    {{--<div class="fly-none">没有相关数据</div>--}}
+                    {{---->--}}
+                {{--</dl>--}}
 
 
                 {{--<div class="fly-panel fly-link">--}}

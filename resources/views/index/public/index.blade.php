@@ -13,14 +13,14 @@
 <div class="fly-header layui-bg-black">
     <div class="layui-container">
         <a class="fly-logo" href="/">
-            <img src="../res/images/logo.png" alt="layui">
+            <img src="{{@asset('/index/res/images/logo.png')}}" alt="layui">
         </a>
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
                 <a href="/"><i class="iconfont icon-jiaoliu"></i>社畜区</a>
             </li>
             <li class="layui-nav-item">
-                <a href="case/case.html"><i class="iconfont icon-iconmingxinganli"></i>绅士区</a>
+                <a href="/"><i class="iconfont icon-iconmingxinganli"></i>绅士区</a>
             </li>
             <li class="layui-nav-item">
                 <a href="{{url('/chat/room')}}" target="_blank"><i class="iconfont icon-ui"></i>交流区</a>
@@ -41,22 +41,22 @@
                 <li class="layui-nav-item">
                     <a href="{{url('register')}}">注册</a>
                 </li>
-                <li class="layui-nav-item layui-hide-xs">
-                    <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入"
-                       class="iconfont icon-qq"></a>
-                </li>
-                <li class="layui-nav-item layui-hide-xs">
-                    <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入"
-                       class="iconfont icon-weibo"></a>
-                </li>
+                {{--<li class="layui-nav-item layui-hide-xs">--}}
+                    {{--<a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入"--}}
+                       {{--class="iconfont icon-qq"></a>--}}
+                {{--</li>--}}
+                {{--<li class="layui-nav-item layui-hide-xs">--}}
+                    {{--<a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入"--}}
+                       {{--class="iconfont icon-weibo"></a>--}}
+                {{--</li>--}}
 
                 <!-- 登入后的状态 -->
             @else
                 <li class="layui-nav-item">
                     <a class="fly-nav-avatar" href="javascript:;">
                         <cite class="layui-hide-xs">{{ Session::get('username') }}</cite>
-                        <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-                        <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
+                        {{--<i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>--}}
+                        {{--<i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>--}}
                         @if(Session::has('img_url'))
                             <img src="{{url(str_replace('public', 'storage', Session::get('img_url')))}}">
                         @else
