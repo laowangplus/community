@@ -315,7 +315,7 @@ class Article extends Model {
                 'article.created_at as create_time', 'experience', 'comment_count',
                 'read', 'tag', 'title', 'accept', 'category.id as category_id',
                 'top', 'essence')
-            ->paginate(2);
+            ->paginate(10);
         if ($article) {
             return $article;
         }
@@ -343,7 +343,7 @@ class Article extends Model {
                 'article.created_at as create_time', 'experience', 'comment_count',
                 'read', 'tag', 'title', 'accept', 'category.id as category_id',
                 'top', 'essence')
-            ->paginate(2);
+            ->paginate(10);
         if ($article) {
             return $article;
         }

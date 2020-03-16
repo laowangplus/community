@@ -159,7 +159,9 @@
               </span>
                                     <div class="jieda-admin">
                                         {{--<span type="edit">编辑</span>--}}
-                                        <span type="del" onclick="del_comment(this, {{$comment->comment_id}})">删除</span>
+                                        @if(Session::exists('id'))
+                                            <span type="del" onclick="del_comment(this, {{$comment->comment_id}})">删除</span>
+                                        @endif
                                         <span class="jieda-user">
                                             @if($article->user_id == Session::get('id') && $article->accept == 0)
                                                 <span class="jieda-accept" type="accept"
@@ -210,23 +212,25 @@
                         <!-- 无数据时 -->
                         <!-- <li class="fly-none">消灭零回复</li> -->
                     </ul>
-
-                    <div class="layui-form layui-form-pane">
-                        <form action="{{url('comment/add/')}}" method="post">
-                            <div class="layui-form-item layui-form-text">
-                                <a name="comment"></a>
-                                <div class="layui-input-block" id="editor1">
+                    @if(Session::exists('id'))
+                        <div class="layui-form layui-form-pane">
+                            <form action="{{url('comment/add/')}}" method="post">
+                                <div class="layui-form-item layui-form-text">
+                                    <a name="comment"></a>
+                                    <div class="layui-input-block" id="editor1">
+                                    </div>
+                                    <textarea id="content" name="content" hidden="hidden"></textarea>
                                 </div>
-                                <textarea id="content" name="content" hidden="hidden"></textarea>
-                            </div>
-                            <input hidden name="article_id" value="{{$article_id}}">
-                            @csrf
-                            <div class="layui-form-item">
-                                <input type="hidden" name="jid" value="123">
-                                <button class="layui-btn">提交回复</button>
-                            </div>
-                        </form>
-                    </div>
+                                <input hidden name="article_id" value="{{$article_id}}">
+                                @csrf
+                                <div class="layui-form-item">
+                                    <input type="hidden" name="jid" value="123">
+                                    <button class="layui-btn">提交回复</button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+
                 </div>
             </div>
             <div class="layui-col-md4">
