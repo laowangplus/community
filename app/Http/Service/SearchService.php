@@ -59,7 +59,6 @@ class SearchService {
             ]);
         }
 
-        var_dump($response);
     }
 
     public function createArticleIndex(){
