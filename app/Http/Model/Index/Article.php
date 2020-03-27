@@ -400,26 +400,34 @@ class Article extends Model {
     }
 
     public static function searchArticles($keyword){
-//        $articles = DB::table('article')
-//            ->join('category', 'category.id', '=', 'category_id')
-//            ->join('user', 'user.id', '=', 'user_id')
-//            ->select('title', 'username', 'classname', 'comment_count',
-//                'article.created_at as create_time', 'article.id as article_id',
-//                'user.id as user_id', 'experience', 'content', 'tag')
-//            ->get();
-
         $service =new SearchService();
-        $article_ids = $service->searchArticle($keyword);
+
+        try{
+            $article_ids = $service->searchArticle($keyword);
+
+            $articles = DB::table('article')
+                ->join('category', 'category.id', '=', 'category_id')
+                ->join('user', 'user.id', '=', 'user_id')
+                ->whereIn('article.id',$article_ids)
+                ->select('title', 'username', 'classname', 'comment_count',
+                    'article.created_at as create_time', 'article.id as article_id',
+                    'user.id as user_id', 'experience', 'accept', 'top', 'essence')
+                ->paginate(20);
+            return $articles;
+        }catch (\Exception $exception){
+            $service->createArticleIndex();
+        }
+
         $articles = DB::table('article')
             ->join('category', 'category.id', '=', 'category_id')
             ->join('user', 'user.id', '=', 'user_id')
-            ->whereIn('article.id',$article_ids)
-            ->select('title', 'username', 'classname', 'comment_count',
-                'article.created_at as create_time', 'article.id as article_id',
-                'user.id as user_id', 'experience', 'accept', 'top', 'essence')
-            ->paginate(20);
-//        dd($articles);
-        return $articles;
+            ->select('title', 'username', 'classname', 'article.id as article_id', 'tag', 'content')
+            ->get();
+
+        foreach ($articles as $data){
+            $service->addArticle($data);
+        }
+
     }
 
 }

@@ -97,5 +97,6 @@ class SearchService {
             ]
         ];
         $response = $this->client->indices()->create($param);
+        return $response;
     }
 }
