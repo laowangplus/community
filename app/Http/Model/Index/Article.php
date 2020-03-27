@@ -402,6 +402,16 @@ class Article extends Model {
     public static function searchArticles($keyword){
         $service =new SearchService();
 
+        $articles = DB::table('article')
+            ->join('category', 'category.id', '=', 'category_id')
+            ->join('user', 'user.id', '=', 'user_id')
+            ->select('title', 'username', 'classname', 'article.id as article_id', 'tag', 'content')
+            ->get();
+
+        foreach ($articles as $data){
+            $service->addArticle($data);
+        }
+
         try{
             $article_ids = $service->searchArticle($keyword);
 
@@ -416,17 +426,18 @@ class Article extends Model {
             return $articles;
         }catch (\Exception $exception){
             $service->createArticleIndex();
+            $articles = DB::table('article')
+                ->join('category', 'category.id', '=', 'category_id')
+                ->join('user', 'user.id', '=', 'user_id')
+                ->select('title', 'username', 'classname', 'article.id as article_id', 'tag', 'content')
+                ->get();
+
+            foreach ($articles as $data){
+                $service->addArticle($data);
+            }
         }
 
-        $articles = DB::table('article')
-            ->join('category', 'category.id', '=', 'category_id')
-            ->join('user', 'user.id', '=', 'user_id')
-            ->select('title', 'username', 'classname', 'article.id as article_id', 'tag', 'content')
-            ->get();
 
-        foreach ($articles as $data){
-            $service->addArticle($data);
-        }
 
     }
 
