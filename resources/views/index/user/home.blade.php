@@ -61,7 +61,7 @@
                                 @endif
                                 <a href="{{url('article/detail/'.$article->article_id)}}" class="jie-title"> {{$article->title}}</a>
                                 <i>{{$article->created_at}}</i>
-                                <em class="layui-hide-xs">1136阅/27答</em>
+                                <em class="layui-hide-xs">{{$article->read}}阅/{{$article->comment_count}}答</em>
                             </li>
                     @endforeach
                     <!-- <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何帖子</i></div> -->
